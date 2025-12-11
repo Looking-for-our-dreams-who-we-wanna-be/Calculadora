@@ -1,18 +1,37 @@
+from flask import Flask, render_template
 
+app = Flask(__name__)   
 
-<python code>
-print("¡Bienvenido a la Calculadora simple!")
+@app.route('/calculadora')
+
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    mensaje_error = None
+    
+    if request.method == 'POST':
+        usuario = request.form['cedula']
+        clave = request.form['password']
+        if usuario == "123" and clave == "admin":
+            return redirect(url_for('mostrar_calculadora'))
+        else:
+            mensaje_error = "Cédula o contraseña incorrectas"
+    return render_template('Pagelogin.html', error=mensaje_error)
+
+def calculator():
+ print("¡Bienvenido a la Calculadora simple!")
+ if __name__ == '__main__':
+    app.run()
 while True:
     print("\nSelecciona una operación:")
     print("  1: Suma")
     print("  2: Resta")
     print("  3: Multiplicación")
     print("  4: División")
-    print("  0: Salir")
+    print("  5: Salir")
 
     choice = input("Ingresa tu elección: ")
 
-    if choice == '0':
+    if choice == '5':
         print("¡Gracias por usar la calculadora! Hasta pronto.")
         break
 
@@ -33,20 +52,19 @@ while True:
             continue
 
         result = numbers[0]
-        if choice == '1': # Suma
+        if choice == '1':
             for i in range(1, len(numbers)):
                 result += numbers[i]
             print(f"El resultado de la suma es: {result}")
-        elif choice == '2': # Resta
+        elif choice == '2':
             for i in range(1, len(numbers)):
                 result -= numbers[i]
             print(f"El resultado de la resta es: {result}")
-        elif choice == '3': # Multiplicación
+        elif choice == '3':
             for i in range(1, len(numbers)):
                 result *= numbers[i]
             print(f"El resultado de la multiplicación es: {result}")
-        elif choice == '4': # División
-            # Handle division by zero for subsequent numbers
+        elif choice == '4':
             valid_division = True
             for i in range(1, len(numbers)):
                 if numbers[i] == 0:
@@ -58,4 +76,5 @@ while True:
                 print(f"El resultado de la división es: {result}")
     else:
         print("pon un numero perrilla")
-</python code>
+
+        
