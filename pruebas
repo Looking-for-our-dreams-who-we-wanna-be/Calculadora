@@ -1,7 +1,0 @@
-@app.route('/calculadora')
-def mostrar_calculadora():
-
-    return render_template('Calculadora.html')
-
-if __name__ == '__main__':
-    app.run(debug=True)

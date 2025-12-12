@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        form { display: inline-block; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        input, select, button { margin: 10px; padding: 10px; font-size: 16px; }
+        .result { font-size: 20px; color: blue; margin-top: 20px; }
+        .stored { font-size: 18px; color: green; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Calculadora con Almacenamiento de Resultado</h1>
+    
+    {% if stored_result %}
+        <div class="stored">Resultado guardado: {{ stored_result }}</div>
+    {% endif %}
+    
+    <form method="POST">
+        <input type="number" name="num1" placeholder="Número 1" step="any" {% if not stored_result %}required{% endif %}><br>
+        <select name="operation" required>
+            <option value="add">+</option>
+            <option value="subtract">-</option>
+            <option value="multiply">*</option>
+            <option value="divide">/</option>
+        </select><br>
+        <input type="number" name="num2" placeholder="Número 2" required step="any"><br>
+        <label><input type="checkbox" name="use_stored"> Usar resultado anterior como primer número</label><br>
+        <button type="submit">Calcular</button>
+        <button type="submit" name="reset_stored" value="true">Resetear Resultado Guardado</button>
+    </form>
+    
+    {% if result %}
+        <div class="result">Resultado: {{ result }}</div>
+    {% endif %}
+</body>
+</html>
